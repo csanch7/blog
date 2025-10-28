@@ -1,6 +1,7 @@
-POST http://localhost:3003/api/blogs Content-Type: application/json
+POST http://localhost:3003/api/blogs 
+Content-Type: application/json
 
 {
-"title": "awesome", "author": "rick grimes", "url": "www.rickgrimes.com", "likes":0
+"title": "yes", "author": "rick grimes", "url": "www.rickgrimes.com", "likes":0
 }
 
