@@ -6,12 +6,29 @@ const app = require('../app')
 
 const helper = require('./test_helper')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 
 const api = supertest(app)
 
 beforeEach(async () => {
   await Blog.deleteMany({})
+  await User.deleteMany({})
+  // Create a test user
+  const user = new User({
+    username: 'testuser',
+    name: 'Test User',
+    password: 'testpassword'
+  })
+  await user.save()
+
+  // Optionally, log in to get a token if your API requires it
+  const loginResponse = await api
+    .post('/api/login')
+    .send({ username: 'testuser', password: 'testpassword' })
+
+  // Store the token for use in the tests
+  this.token = loginResponse.body.token
 
   await Blog.insertMany(helper.initialBlogs)
 })
@@ -34,28 +51,28 @@ test('all blog have property id', async () => {
   assert.strictEqual(response.body.length, filteredContents.length)
 })
 
-test('a valid blog can be added ', async () => {
-  const newblog = {
+test('a valid blog can be added', async () => {
+  const newBlog = {
     title: 'wowman',
     author: 'wow yes',
     url: 'www.rickgrimes.com',
     likes: 22,
   }
-
   await api
     .post('/api/blogs')
-    .send(newblog)
+    .set('Authorization', `Bearer ${this.token}`) // Include the token in the request
+    .send(newBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
-
 
   const blogsAtEnd = await helper.blogsInDb()
   assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-
   const contents = blogsAtEnd.map(n => n.title)
   assert(contents.includes('wowman'))
 })
+
+
 
 test('a blog can be added without likes', async () => {
   const newblog = {

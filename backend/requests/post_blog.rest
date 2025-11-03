@@ -1,7 +1,8 @@
 POST http://localhost:3003/api/blogs 
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhcmwgZ3JpbWVzIiwiaWQiOiI2OTA4MGE3M2VmY2RlYjZlMjk3ZjUxNDUiLCJpYXQiOjE3NjIxMzkzMzksImV4cCI6MTc2MjE0MjkzOX0.wCz8ZoHhJueo_t99PwdyiLbZlH43ypb06oep6_1sOcs
 
 {
-"title": "yes", "author": "rick grimes", "url": "www.rickgrimes.com", "likes":0
+"title": "my name is carl", "author": "carl grimes", "url": "www.rickgrimes.com", "likes":0
 }
 
