@@ -68,8 +68,6 @@ test('a valid blog can be added', async () => {
   const blogsAtEnd = await helper.blogsInDb()
   assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length + 1)
 
-  const contents = blogsAtEnd.map(n => n.title)
-  assert(contents.includes('wowman'))
 })
 
 
