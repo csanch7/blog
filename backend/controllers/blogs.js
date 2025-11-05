@@ -56,14 +56,25 @@ blogRouter.delete('/:id', async (request, response) => {
 })
 
 blogRouter.put('/:id', async (request, response) => {
+  const user = request.user
+
+  const userid = user._id
+
+  if (!user) {
+    return response.status(400).json({ error: 'UserId missing or not valid' })
+  }
   const { likes } = request.body
+
   const blog = await Blog.findById(request.params.id)
   if (!blog){
     return response.status(404).end()
   }
-  blog.likes = likes
-  const updatedBlog = await blog.save()
-  return response.json(updatedBlog)
+
+  if ( blog.user.toString() === userid.toString() ){
+    blog.likes = likes
+    const updatedBlog = await blog.save()
+    return response.json(updatedBlog)
+  }
 })
 
 module.exports = blogRouter
