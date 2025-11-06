@@ -19,19 +19,19 @@ const BlogForm = ({ createBlog }) => {
                 title:
         <input value={newTitle} onChange={event => {
           setNewTitle(event.target.value)
-        }} />
+        }} placeholder='Title Here' />
       </label><br />
       <label>
                 author:
         <input value={newAuthor} onChange={event => {
           setNewAuthor(event.target.value)
-        }} />
+        }} placeholder='Author Here'/>
       </label><br />
       <label>
                 url:
         <input value={newUrl} onChange={event => {
           setNewUrl(event.target.value)
-        }} />
+        }} placeholder='Url Here'/>
       </label><br />
       <button type="submit">save</button>
     </form>
