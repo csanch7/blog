@@ -16,7 +16,7 @@ const Blog = ({ blog, blogLiked, deleteBlog }) => {
     setVisible(!visible)
   }
   return (
-    <div style={blogStyle} >
+    <div className="blog"style={blogStyle} >
       <div>
         <div>
           {blog.title}
