@@ -1,9 +1,7 @@
-const Creation = ({blogForm}) => (
-    <div>
-        <h2>create new</h2>
+const Creation = ({ blogForm }) => (
+  <div>
+    {blogForm}
+  </div>
+);
 
-        {blogForm}
-    </div>
-)
-
-export default Creation
+export default Creation;

@@ -1,44 +1,64 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { notificationMaker } from "../reducers/notificationReducer";
 
 const BlogForm = ({ createBlog }) => {
-  const [newTitle, setNewTitle] = useState('')
-  const [newAuthor, setNewAuthor] = useState('')
-  const [newUrl, setNewUrl] = useState('')
+  const [newTitle, setNewTitle] = useState("");
+  const [newAuthor, setNewAuthor] = useState("");
+  const [newUrl, setNewUrl] = useState("");
+
+  const dispatch = useDispatch();
 
   const addBlog = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     createBlog({
       title: newTitle,
       author: newAuthor,
-      url: newUrl
-    })
-    setNewTitle('')
-    setNewAuthor('')
-    setNewUrl('')
-  }
+      url: newUrl,
+    });
+    dispatch(notificationMaker(`You added '${newTitle} by ${newAuthor}'`, 5));
+    setNewTitle("");
+    setNewAuthor("");
+    setNewUrl("");
+  };
   return (
     <form onSubmit={addBlog}>
       <label>
-                title:
-        <input value={newTitle} onChange={event => {
-          setNewTitle(event.target.value)
-        }} placeholder='Title Here' />
-      </label><br />
+        title:
+        <input
+          value={newTitle}
+          onChange={(event) => {
+            setNewTitle(event.target.value);
+          }}
+          placeholder="Title Here"
+        />
+      </label>
+      <br />
       <label>
-                author:
-        <input value={newAuthor} onChange={event => {
-          setNewAuthor(event.target.value)
-        }} placeholder='Author Here'/>
-      </label><br />
+        author:
+        <input
+          value={newAuthor}
+          onChange={(event) => {
+            setNewAuthor(event.target.value);
+          }}
+          placeholder="Author Here"
+        />
+      </label>
+      <br />
       <label>
-                url:
-        <input value={newUrl} onChange={event => {
-          setNewUrl(event.target.value)
-        }} placeholder='Url Here'/>
-      </label><br />
+        url:
+        <input
+          value={newUrl}
+          onChange={(event) => {
+            setNewUrl(event.target.value);
+          }}
+          placeholder="Url Here"
+        />
+      </label>
+      <br />
       <button type="submit">save</button>
     </form>
-  )
-}
+  );
+};
 
-export default BlogForm
+export default BlogForm;

@@ -1,32 +1,31 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Blog = ({ blog, blogLiked, deleteBlog }) => {
-  const [visible, setVisible] = useState(false)
+const Blog = ({ blog }) => {
+  console.log(blog);
+  
+  if (!blog) {
+    return null;
+  }
+  const [visible, setVisible] = useState(false);
 
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
-    border: 'solid',
+    border: "solid",
     borderWidth: 1,
-    marginBottom: 5
-  }
-
+    marginBottom: 5,
+  };
 
   const toggleVisibility = () => {
-    setVisible(!visible)
-  }
+    setVisible(!visible);
+  };
   return (
-    <div className="blog"style={blogStyle} >
+    <div className="blog" style={blogStyle}>
       <div>
-        <div>
-          {blog.title}
-        </div>
-        <div>
-          {blog.author}
-        </div>
-        <button onClick={toggleVisibility}>
-          {visible ? 'hide' : 'view'}
-        </button>
+        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+        <div>{blog.author}</div>
+        <button onClick={toggleVisibility}>{visible ? "hide" : "view"}</button>
       </div>
 
       {visible && (
@@ -41,7 +40,7 @@ const Blog = ({ blog, blogLiked, deleteBlog }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Blog
+export default Blog;
